@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rating site</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	ul{
+		list-style: none;
+	}
+	li{
+		display: inline-block;
+	}
+	.fa-star-o{
+		font-size: 50px;
+	}
+	.orange{ color: orange }
+	.yellow{color: yellow  }
+</style>
+</head>
+<body>
+<h2 align="center">Rate your favourite picture </h2>
+
+<div align="center"><img src="https://picsum.photos/400" align="center"></div>
+<div align="center">
+<ul >
+<li class="stars"><i class="fa fa-star-o"></i></li>
+<li class="stars"><i class="fa fa-star-o"></i></li>
+<li class="stars"><i class="fa fa-star-o"></i></li>
+<li class="stars"><i class="fa fa-star-o"></i></li>
+<li class="stars"><i class="fa fa-star-o"></i></li>
+
+
+</ul>
+</div>
+
+<h3 align="center" id="output">RATING</h3>
+<div align="center" onclick="nextPage()"><button>NEXT</button></div>
+<script>
+	const stars = document.querySelectorAll('.stars');
+
+	// for(var i =0; i<5;i++){
+	// 		stars[i].starValue = (i + 1);
+	// 		stars[i].addEventListener('click',function(){
+	// 			console.log('I was clicked')
+	// 		});
+	// }
+	for(var i =0; i<5;i++){
+		stars[i].starValue = (i + 1);
+	['click','mouseover','mouseout'].forEach(function(e){
+		
+		stars[i].addEventListener(e,showrating);
+		
+	});
+}
+
+	function showrating(e) {
+		let type = e.type;
+		let starValue =this.starValue;
+			if(type === 'click'){
+				if(starValue > 1){
+				document.getElementById('output').innerHTML = 'You rated this ' +starValue + ' stars.'
+			}
+		}
+		stars.forEach(function(elem,ind){
+			if(type === 'click'){
+				if(ind < starValue){
+				elem.classList.add('orange')
+			}
+			else{
+				elem.classList.remove('orange')
+			}
+		  }
+
+			if(type === 'mouseover'){
+				if(ind < starValue){
+				elem.classList.add('yellow')
+			}
+			else{
+				elem.classList.remove('yellow')
+			}
+		  }
+
+		  if(type === 'mouseout'){
+		  	elem.classList.remove('yellow')
+		  }
+		})
+	}
+	function nextPage(){
+		window.location.reload();
+	}
+
+</script>
+
+</body>
+</html>
